@@ -9,7 +9,7 @@ namespace BookApiProject.Services
         ICollection<Country> GetCountries();
 
         // Get COUNTRY by ID
-        Country GetCountry(int countryId);
+        Country GetCountryById(int countryId);
 
         // Get COUNTRY of AUTHOR
          Country GetCountryOfAnAuthor(int authorId);

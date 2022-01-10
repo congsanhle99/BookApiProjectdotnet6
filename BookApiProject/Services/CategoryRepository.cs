@@ -10,15 +10,11 @@ namespace BookApiProject.Services
         {
             _appDbContext = appDbContext;
         }
-        public bool CategoryExists(int categoryId)
-        {
-            return _appDbContext.Categories.Any(c => c.Id == categoryId);
-        }
         public ICollection<Category> GetCategories()
         {
             return _appDbContext.Categories.OrderBy(c => c.Name).ToList();
-        }
-        public Category GetCategory(int categoryId)
+        } 
+        public Category GetCategoryById(int categoryId)
         {
             return _appDbContext.Categories.Where(c => c.Id == categoryId).FirstOrDefault();
         }
@@ -31,6 +27,10 @@ namespace BookApiProject.Services
         public ICollection<Category> GetAllCategoriesForABook(int bookId)
         {
             return _appDbContext.BookCategories.Where(b => b.BookId == bookId).Select(c => c.Category).ToList();
+        }
+        public bool CategoryExists(int categoryId)
+        {
+            return _appDbContext.Categories.Any(c => c.Id == categoryId);
         }
 
     }

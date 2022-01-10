@@ -11,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //
-builder.Services.AddScoped<ICountryRepository, CountryRepository>(); 
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 var connectionString = builder.Configuration.GetConnectionString("Default");

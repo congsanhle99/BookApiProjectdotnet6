@@ -26,7 +26,7 @@ namespace BookApiProject.Services
         }
 
         // get country by Id
-        public Country GetCountry(int countryId)
+        public Country GetCountryById(int countryId)
         {
             return _appDbContext.Countries
                 .Where(c => c.Id == countryId)

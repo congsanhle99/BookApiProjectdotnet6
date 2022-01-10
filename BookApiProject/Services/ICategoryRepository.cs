@@ -8,7 +8,7 @@ namespace BookApiProject.Services
         ICollection<Category> GetCategories();
 
         // get category by id
-        Category GetCategory(int categoryId);
+        Category GetCategoryById(int categoryId);
 
         //get category for a book
         ICollection<Category> GetAllCategoriesForABook(int bookId);

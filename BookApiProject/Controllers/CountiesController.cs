@@ -20,10 +20,11 @@ namespace BookApiProject.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<CountryDTO>))]
         public IActionResult GetCountries()
         {
-            var countries = _countryRepository.GetCountries().ToList();
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var countries = _countryRepository.GetCountries().ToList();
 
             var countriesDTO = new List<CountryDTO>();
             foreach (var country in countries)
@@ -47,27 +48,7 @@ namespace BookApiProject.Controllers
             if (!_countryRepository.CountryExists(id))
                 return NotFound();
 
-            var country = _countryRepository.GetCountry(id);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var countryDTO = new CountryDTO()
-            {
-                Id = country.Id,
-                Name = country.Name
-            };     
-            return Ok(countryDTO);
-        }
-
-        // api/country/authors/authorId
-        [HttpGet("authors/{authorId}")]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(200, Type = typeof(CountryDTO))]
-        public IActionResult GetCountryOfAnAuthor(int authorId)
-        {
-           var country = _countryRepository.GetCountryOfAnAuthor(authorId);
+            var country = _countryRepository.GetCountryById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -78,7 +59,29 @@ namespace BookApiProject.Controllers
                 Name = country.Name
             };
             return Ok(countryDTO);
-
         }
+
+        // api/country/authors/authorId
+        [HttpGet("authors/{authorId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
+        public IActionResult GetCountryOfAnAuthor(int authorId)
+        {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var country = _countryRepository.GetCountryOfAnAuthor(authorId);
+
+            var countryDTO = new CountryDTO()
+            {
+                Id = country.Id,
+                Name = country.Name
+            };
+            return Ok(countryDTO);
+        }
+
+        //TO DO GetAuthorsFromACountry
     }
 }
